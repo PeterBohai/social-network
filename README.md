@@ -17,10 +17,8 @@ Note the quality of the following clips may be lower due to conversion from vide
 <img src="network/static/network_login_register.gif" width=62%/>
 
 ### Screenshots
-<img src="network/static/screenshot_network_home.png" width=48%/>
-<img src="network/static/screenshot_network_login.png" width=48%/> <br/>
-<img src="network/static/screenshot_network_profile.png" width=48%/>
-<img src="network/static/screenshot_network_main.png" width=48%/>
+<img src="network/static/screenshot_network_home.png" width=48%/> &nbsp;<img src="network/static/screenshot_network_login.png" width=48%/><br/>
+<img src="network/static/screenshot_network_profile.png" width=48%/> &nbsp;<img src="network/static/screenshot_network_main.png" width=48%/>
 
 ### Architecture
 **Frontend**
