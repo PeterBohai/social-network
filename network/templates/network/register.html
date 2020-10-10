@@ -1,0 +1,43 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div class="text-center" style="padding: 20px 70px; background-color: white">
+        <div style="font-size: 37px; color: rgba(29,161,242,1.00);"><i class="mr-4 fab fa-twitter"></i></div>
+        <div class="login-title mb-3 mt-4"><strong>Create Your Account</strong></div>
+        {% if message %}
+            <div>{{ message }}</div>
+        {% endif %}
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group text-left login-form-group" style="display: inline-block; width: 49.55%;">
+                <label for="register-firstname" class="text-muted">First name</label>
+                <input class="form-control login-input" autofocus type="text" name="first_name" id="register-firstname">
+            </div>
+            <div class="form-group text-left login-form-group" style="display: inline-block;  width: 49.55%">
+                <label for="register-lastname" class="text-muted">Last name</label>
+                <input class="form-control login-input" type="text" name="last_name" id="register-lastname">
+            </div>
+            <div class="form-group text-left login-form-group">
+                <label for="register-username" class="text-muted">Username</label>
+                <input class="form-control login-input" type="text" name="username" id="register-username">
+            </div>
+            <div class="form-group text-left login-form-group">
+                <label for="register-email" class="text-muted">Email</label>
+                <input class="form-control login-input" type="email" name="email" id="register-email">
+            </div>
+            <div class="form-group text-left login-form-group" >
+                <label for="register-password" class="text-muted">Password</label>
+                <input class="form-control login-input" type="password" name="password" id="register-password">
+            </div>
+            <div class="form-group text-left login-form-group" >
+                <label for="confirm-password" class="text-muted">Password</label>
+                <input class="form-control login-input" type="password" name="confirmation" id="confirm-password">
+            </div>
+
+            <input style="width: 100%; height: 45px" class="btn register-btn" type="submit" value="Register">
+        </form>
+        <div class="mt-4 login-bot-text">
+            Already have an account? <a style="color: rgba(29,161,242,1.00);" href="{% url 'login' %}">Log In here.</a>
+        </div>
+    </div>
+{% endblock %}

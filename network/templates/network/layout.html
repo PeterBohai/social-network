@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'network/css/all.css' %}" rel="stylesheet">
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let pathname = window.location.pathname
+                let allposts = document.querySelector("#allposts")
+                let following = document.querySelector("#following-link")
+                let profile = document.querySelector("#profile-link")
+                let topTitle = document.querySelector("#top-title")
+
+                if (pathname === "/") {
+                    allposts.classList.add("active")
+                    topTitle.innerHTML = "All Posts"
+                } else {
+                    allposts.classList.remove("active")
+                }
+
+                let bodyDiv = document.querySelector(".body")
+                let topNav = document.querySelector(".top-nav")
+                if (pathname === "/login" || pathname === "/register") {
+                    bodyDiv.style.backgroundColor = "white"
+                    topNav.style.borderBottom = "none"
+                } else {
+                    bodyDiv.style.backgroundColor = "#F0F2F5"
+                    topNav.style.borderBottom = "1px solid #e2e2e2"
+                }
+
+                if (pathname.startsWith("/profile/")) {
+                    if (pathname === "/profile/{{ user.username }}") {
+                        profile.classList.add("active")
+                    }
+                    profile.innerHTML = `<i class="mr-4 fas fa-user"></i>Profile`
+                    topTitle.innerHTML = `<span style="margin: 0">{{ user_profile.first_name }} {{ user_profile.last_name }}</span><br><span class="text-muted" style="font-size: 13px; font-weight: normal">{{ user_profile.posts.count }} Tweets</span>`
+                    topTitle.style.lineHeight = "18px";
+                    topTitle.style.padding = "0";
+
+                } else {
+                    profile.classList.remove("active")
+                    profile.innerHTML = `<i class="mr-4 far fa-user"></i>Profile`
+                }
+
+                if (pathname === "/following") {
+                    following.classList.add("active")
+                    topTitle.innerHTML = "Following"
+                } else {
+                    following.classList.remove("active")
+                }
+            });
+        </script>
+    </head>
+    <body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'index' %}" style="font-size: 27px; color: rgba(29,161,242,1.00);"><i class="mr-4 fab fa-twitter"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="allposts" class="nav-link" href="{% url 'index' %}"><i class="mr-4 fas fa-home"></i>All Posts</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a id="following-link" class="nav-link" href="{% url 'following' %}"><i class="mr-4 fas fa-hashtag"></i>Following</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href=""><i class="mr-4 far fa-bell"></i>Notifications</a></li>
+                            <li class="nav-item"><a class="nav-link" href=""><i class="mr-4 far fa-envelope"></i>Messages</a></li>
+                            <li class="nav-item"><a class="nav-link" href=""><i class="mr-4 far fa-bookmark"></i>Bookmarks</a></li>
+                            <li class="nav-item"><a class="nav-link" href=""><i class="mr-4 far fa-list-alt"></i>Lists</a></li>
+                            <li class="nav-item">
+                                <a id="profile-link" class="nav-link" href="{% url 'profile' user.username %}"><i class="mr-4 far fa-user"></i>Profile</a>
+                            </li>
+                            <li class="nav-item mt-3">
+                                <a class="nav-link btn register-btn"  style="width: 87%; font-size: 16px; height: 50px; line-height: 35px" href="{% url 'logout' %}">Log Out</a>
+
+                            </li>
+                            <div class="bottom-user-info" style="margin-top: 100px; line-height: 20px;">
+
+                                <div style="font-size: 1rem;">{{ user.first_name }} {{ user.last_name }}</div>
+                                <div class="text-muted" style="display:inline-block; font-size: 15px; font-weight: normal">@{{ user.username }}</div>
+                            </div>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href=""><i class="mr-4 fas fa-cog"></i> Settings</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="body col-md-6" style="padding: 0">
+                <div class="top-nav navbar navbar-expand-md" style="position: sticky; top: 0; z-index: 1030">
+                    <span id="top-title" class="navbar-brand"></span>
+                </div>
+                {% block body %}
+                {% endblock %}
+            </div>
+
+            <div class="right-side col-md-4" style="padding: 15px 25px 0 25px;">
+                {% if not user.is_authenticated %}
+                    <div class="card w-100" style="border-radius: 15px">
+                          <div class="card-body">
+                              <h5 class="card-title" style="margin-bottom: 2px"><strong>Welcome to the Network!</strong></h5>
+                              <p class="card-text"><small class="text-muted">Don't forget to like the video :)</small></p>
+
+                              <a style="width: 100%" class="btn register-btn mb-3" href="{% url 'register' %}">Register</a>
+                              <a style="width: 100%" class="btn follow-btn" href="{% url 'login' %}">Log In</a>
+                          </div>
+                    </div>
+                {% else %}
+                    <div class="card w-100" style="border-radius: 15px; overflow: hidden; border-color: transparent">
+                        <div class="card-header" style="font-weight: bolder; font-size: 18px; background-color: rgb(245, 248, 250); padding-left: 16px">You might like</div>
+                          <div class="card-body" style="padding: 0; background-color: rgb(245, 248, 250);">
+                              <div class="right-grey right-subcomponent">
+                                  <div class="row no-gutters" style="height: 100%">
+                                      <div class="col-md-5 right-side-pics" style="background: url('{% static 'network/thumbnails/project0.png' %}') no-repeat center /contain">
+                                      </div>
+                                      <div class="col-md-7 pl-3 right-text" style="transform: translateY(-34%);">
+                                          <a class="YT-link" href="https://www.youtube.com/watch?v=idbY8Y0gPhU">Harvard CS50 Web Project 0 (Search) 2020</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="right-grey right-subcomponent">
+                                  <div class="row no-gutters" style="height: 100%">
+                                      <div class="col-md-5 right-side-pics" style="background: url('{% static 'network/thumbnails/project1.png' %}') no-repeat center /contain">
+                                      </div>
+                                      <div class="col-md-7 pl-3 right-text" style="transform: translateY(-27%);">
+                                          <a class="YT-link" href="https://www.youtube.com/watch?v=Hgxg-c1tas8">Harvard CS50 Web Project 1 (Wiki) 2020</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="right-grey right-subcomponent">
+                                  <div class="row no-gutters" style="height: 100%">
+                                      <div class="col-md-5 right-side-pics" style="background: url('{% static 'network/thumbnails/project2.png' %}') no-repeat center /contain">
+                                      </div>
+                                      <div class="col-md-7 pl-3 right-text" style="transform: translateY(-34%);">
+                                          <a class="YT-link" href="https://www.youtube.com/watch?v=OYjvj63-uH4">Harvard CS50 Web Project 2 (Commerce) 2020</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="right-grey right-subcomponent" style="border-bottom: none">
+                                  <div class="row no-gutters" style="height: 100%">
+                                      <div class="col-md-5 right-side-pics" style="background: url('{% static 'network/thumbnails/project3.png' %}') no-repeat center /contain">
+                                      </div>
+                                      <div class="col-md-7 pl-3 right-text" style="transform: translateY(-27%);">
+                                          <a class="YT-link" href="https://www.youtube.com/watch?v=o1HasFr7RUw">Harvard CS50 Web Project 3 (Mail) 2020</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

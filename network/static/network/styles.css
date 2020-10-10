@@ -1,0 +1,297 @@
+body {
+    overscroll-behavior-y: none;
+}
+
+.body {
+    border-right: 1px solid #e2e2e2;
+    border-left: 1px solid #e2e2e2;
+    background-color: #F0F2F5;
+}
+
+.sidebar {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-left: 10px;
+}
+
+.sidebar-sticky {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 10px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.nav-link {
+    font-size: 19px;
+    font-weight: bolder;
+    color: black;
+    transition-duration: 0.25s;
+    border-radius: 999px;
+    padding-right: 20px;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.bottom-user-info {
+    font-size: 19px;
+    font-weight: bolder;
+    padding-left: 20px;
+}
+
+.active {
+    color: rgba(29,161,242,1.00);
+}
+
+.nav-link:hover {
+    color: rgba(29,161,242,1.00);
+    background-color: rgba(29,161, 242, 0.1);
+}
+
+@media (min-width: 768px) {
+    .col-md-2 {
+        -ms-flex: 0 0 21.5%;
+        flex: 0 0 21.5%;
+        max-width: 21.5%;
+    }
+}
+
+.top-nav {
+    background-color: white;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.navbar-brand {
+    font-size: 19px;
+    font-weight: bolder;
+    color: black;
+}
+
+.navbar-brand:hover {
+    cursor: pointer;
+}
+
+@media (min-width: 576px) {
+    .col-sm-2 {
+        -ms-flex: 0 0 13%;
+        flex: 0 0 13%;
+        max-width: 13%;
+    }
+}
+
+#postContent {
+    outline: 0;
+    border: none;
+    margin-top: 1rem;
+    font-size: 19px;
+    resize: none;
+    overflow: hidden;
+}
+
+#postContent::placeholder{
+    color: #cfcfcf;
+}
+
+#postContent:focus {
+    outline: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.post-submit {
+    float: right;
+    font-weight: bolder;
+    background-color: rgba(29,161,242,1.00);
+    border-color: transparent;
+    border-radius: 999px;
+}
+
+.no-hover-underline:hover {
+    text-decoration: none;
+}
+
+a.card-title {
+    color: black;
+}
+
+.post-btn, .edit-btn {
+    border: none;
+    color: #606770;
+}
+
+.post-btn:hover{
+    background-color: rgba(0, 0, 0, .05);
+    color: #606770;
+}
+
+.btn {
+    border: none;
+}
+
+.btn:focus {
+    outline: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.edit-btn:hover {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.post-date {
+    color: #8d9498;
+}
+
+.post-profile-pic {
+    padding: 0;
+    background-position: center;
+    background-size: contain;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+}
+
+#edit-post-textarea {
+    border-width: 2px;
+    border-color: #dbdbdb;
+    border-radius: 2px;
+}
+
+#edit-post-textarea:focus {
+    box-shadow: none;
+    border-color: rgba(29,161,242,1.00);;
+}
+
+.top-profile-pic {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.follow-btn {
+    font-weight: bold;
+    color: rgba(29,161,242,1.00);
+    background-color: white;
+    border: 1px solid rgba(29,161,242,1.00);
+    border-radius: 999px;
+}
+
+.follow-btn:hover {
+    color: rgba(29,161,242,1.00);
+    background-color: rgb(226, 241, 255);
+}
+
+.following-btn {
+    font-weight: bold;
+    color: white;
+    background-color: rgba(29,161,242,1.00);
+    border: transparent;
+    border-radius: 999px;
+}
+
+.following-btn:hover {
+    color: white;
+}
+
+.page-link {
+    color: rgba(29,161,242,1.00);
+    font-size: 14px;
+}
+
+.current {
+    color: #606770;
+}
+
+.current:hover {
+    background: white;
+    color: #606770;
+    cursor: default;
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        -ms-flex: 0 0 28.5%;
+        flex: 0 0 28.5%;
+        max-width: 28.5%;
+    }
+}
+
+.register-btn {
+    font-weight: bold;
+    color: white;
+    background-color: rgba(29,161,242,1.00);
+    border: transparent;
+    border-radius: 999px;
+}
+
+.register-btn:hover {
+    color: white;
+    background-color: rgb(22, 150, 229);
+}
+
+.form-group.login-form-group {
+    background-color: rgb(245, 248, 250)!important;
+}
+
+label.text-muted {
+    font-size: 15px;
+    padding-left: 12px;
+    margin-bottom: 0;
+}
+
+.login-input {
+    border: none;
+    padding: 2px 12px;
+    background-color: rgb(245, 248, 250);
+    border-bottom: 2px solid rgb(118, 118, 118);
+    border-radius: 0;
+    height: inherit;
+}
+
+.login-input:focus {
+    background-color: rgb(245, 248, 250);
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    border-bottom: 2px solid rgba(29,161,242,1.00);
+}
+
+.login-title {
+    font-size: 22px;
+}
+
+.login-bot-text {
+    font-size: 14px;
+}
+
+.right-grey {
+    background-color: rgb(245, 248, 250);
+}
+
+.right-subcomponent {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    height: 100px;
+    border-bottom: 1px solid rgb(232, 236, 238);
+}
+
+.right-side-pics {
+    padding: 0 12px;
+    background-origin: content-box;
+}
+
+.right-text {
+   position: relative;
+   top: 50%;
+}
+
+a.YT-link {
+    color: rgba(29,161,242,1.00);
+}
+
+a.YT-link:hover {
+    color: rgb(6, 120, 190);
+    text-decoration: none;
+}
